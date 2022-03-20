@@ -5,10 +5,13 @@
 replicaCount: 1
 
 s3proxy:
+  port: 80
   secret: s3proxy-secret
+  sslEnabled: false
+  keystoreSecret: s3proxy-keystore
 
 image:
-  repository: andrewgaul/s3proxy
+  repository: andrewpkent/s3proxy
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"

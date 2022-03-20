@@ -28,25 +28,37 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
+        {{- if .Values.s3proxy.sslEnabled}}
+        volumes:
+          - name: keystore
+            secret:
+              secretName: {{ .Values.s3proxy.keystoreSecret }}
+        {{- end }}
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.s3proxy.sslEnabled}}
+          volumeMounts:
+            - mountPath: "/opt/s3proxy/certs"
+              name: keystore
+              readOnly: true
+          {{- end }}
           envFrom:
             - secretRef:
                 name: {{ .Values.s3proxy.secret }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.s3proxy.port }}
               protocol: TCP
           livenessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
           readinessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
