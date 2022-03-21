@@ -28,23 +28,19 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        {{- if .Values.s3proxy.sslEnabled}}
         volumes:
           - name: keystore
             secret:
               secretName: {{ .Values.s3proxy.keystoreSecret }}
-        {{- end }}
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.s3proxy.sslEnabled}}
           volumeMounts:
             - mountPath: "/opt/s3proxy/certs"
               name: keystore
               readOnly: true
-          {{- end }}
           envFrom:
             - secretRef:
                 name: {{ .Values.s3proxy.secret }}

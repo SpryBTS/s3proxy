@@ -5,9 +5,8 @@
 replicaCount: 1
 
 s3proxy:
-  port: 80
+  port: 443
   secret: s3proxy-secret
-  sslEnabled: false
   keystoreSecret: s3proxy-keystore
 
 image:
