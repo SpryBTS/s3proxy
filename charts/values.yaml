@@ -10,10 +10,10 @@ s3proxy:
   keystoreSecret: s3proxy-keystore
 
 image:
-  repository: andrewpkent/s3proxy
+  repository: s3proxy
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "1.9.1-snapshot"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -43,7 +43,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 443
 
 ingress:
   enabled: false
