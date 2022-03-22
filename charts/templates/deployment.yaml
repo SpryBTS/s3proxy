@@ -27,11 +27,11 @@ spec:
       serviceAccountName: {{ include "charts.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      volumes:
+        - name: "keystore"
+          secret:
+            secretName: {{ .Values.s3proxy.keystoreSecret }}
       containers:
-        volumes:
-          - name: keystore
-            secret:
-              secretName: {{ .Values.s3proxy.keystoreSecret }}
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
@@ -39,7 +39,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - mountPath: "/opt/s3proxy/certs"
-              name: keystore
+              name: "keystore"
               readOnly: true
           envFrom:
             - secretRef:
