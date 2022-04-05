@@ -99,7 +99,8 @@ public final class S3Proxy {
         }
 
         if (builder.secureEndpoint != null) {
-            SslContextFactory sslContextFactory = new SslContextFactory();
+            SslContextFactory sslContextFactory =
+                new SslContextFactory.Server();
             sslContextFactory.setKeyStorePath(builder.keyStorePath);
             sslContextFactory.setKeyStorePassword(builder.keyStorePassword);
             connector = new ServerConnector(server, sslContextFactory,
@@ -315,8 +316,10 @@ public final class S3Proxy {
         public Builder awsAuthentication(AuthenticationType authenticationType,
                 String identity, String credential) {
             this.authenticationType = authenticationType;
-            this.identity = requireNonNull(identity);
-            this.credential = requireNonNull(credential);
+            if (!AuthenticationType.NONE.equals(authenticationType)) {
+                this.identity = requireNonNull(identity);
+                this.credential = requireNonNull(credential);
+            }
             return this;
         }
 
