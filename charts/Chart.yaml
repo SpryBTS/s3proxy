@@ -1,9 +1,9 @@
 apiVersion: v2
-appVersion: 1.9.1-snapshot
+appVersion: 2.1.0-snapshot
 name: s3proxy
 description: s3proxy chart
 type: application
-version: 0.1.5
+version: 0.1.6
 home: https://github.com/SpryBTS/s3proxy
 icon: https://wiki.openstack.org/w/images/thumb/f/ff/Swift-complete-300.png/247px-Swift-complete-300.png
 maintainers:
