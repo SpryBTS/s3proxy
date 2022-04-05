@@ -45,7 +45,7 @@ image:
   repository: s3proxy
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.9.1-snapshot"
+  tag: "2.1.0-snapshot"
 
 imagePullSecrets: []
 nameOverride: ""
