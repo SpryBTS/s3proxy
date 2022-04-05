@@ -15,6 +15,9 @@ exec java \
     -Ds3proxy.secure-endpoint="${S3PROXY_SECURE_ENDPOINT}" \
     -Ds3proxy.keystore-path="${S3PROXY_KEYSTORE_PATH}" \
     -Ds3proxy.keystore-password="${S3PROXY_KEYSTORE_PASSWORD}" \
+    -Ds3proxy.encrypted-blobstore="${S3PROXY_ENCRYPTED_BLOBSTORE}" \
+    -Ds3proxy.encrypted-blobstore-password="${S3PROXY_ENCRYPTED_BLOBSTORE_PASSWORD}" \
+    -Ds3proxy.encrypted-blobstore-salt="${S3PROXY_ENCRYPTED_BLOBSTORE_SALT}" \
     -Djclouds.provider="${JCLOUDS_PROVIDER}" \
     -Djclouds.identity="${JCLOUDS_IDENTITY}" \
     -Djclouds.credential="${JCLOUDS_CREDENTIAL}" \
