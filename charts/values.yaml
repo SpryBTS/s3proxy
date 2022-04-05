@@ -4,10 +4,42 @@
 
 replicaCount: 1
 
+log_level: info
+
 s3proxy:
   port: 443
   secret: s3proxy-secret
   keystoreSecret: s3proxy-keystore
+
+  endpoint: http://0.0.0.0:80
+  virtual-host: ''
+  authorization: ''
+  identity: local-identity
+  credential: local-credential
+  cors-allow-all: ''
+  cors-allow-origins: ''
+  cors-allow-methods: ''
+  cors-allow-headers: ''
+  ignore-unknown-headers: false
+  secure-endpoint: https://0.0.0.0:443
+  keystore-path: keystore.jks
+  keystore-password: ''
+  encrypted-blobstore: ''
+  encrypted-blobstore-password: ''
+  encrypted-blobstore-salt: ''
+
+jclouds:
+  provider: filesystem
+  identity: remote-identity
+  credential: remote-credential
+  endpoint: ''
+  region: ''
+  regions: us-east-1
+  keystone:
+    version: ''
+    scope: ''
+    project-domain-name: ''
+  filesystem.basedir: /data
 
 image:
   repository: s3proxy
