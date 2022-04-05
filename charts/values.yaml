@@ -39,7 +39,8 @@ jclouds:
     version: ''
     scope: ''
     project-domain-name: ''
-  filesystem.basedir: /data
+  filesystem:
+    basedir: '/data'
 
 image:
   repository: s3proxy
