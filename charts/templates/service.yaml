@@ -11,7 +11,7 @@ spec:
       targetPort: http
       protocol: TCP
       {{-  if (and (eq .Values.service.type "NodePort") (not (empty .Values.service.nodePort))) }}
-      nodePort: {{.Values.service.nodePort}}
+      nodePort: {{ int .Values.service.nodePort }}
       {{- end }}
   selector:
     {{- include "charts.selectorLabels" . | nindent 4 }}

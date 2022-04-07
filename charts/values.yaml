@@ -77,6 +77,7 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 443
+  nodePort: 32777
 
 ingress:
   enabled: false
